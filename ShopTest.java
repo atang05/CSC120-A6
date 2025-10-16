@@ -10,10 +10,10 @@ public class ShopTest {
     // computer tests
 
     /*
-     * This method tests whether the computer constructor passes all the values of the variables.
+     * This method tests whether the computer constructor passes the description of computer correctly.
      */
     @Test
-    public void test_computer_constructor(){
+    public void test_computer_constructor_description(){
         Computer myComputer = new Computer(
             "2019 MacBook Pro", 
             "Intel", 
@@ -22,12 +22,125 @@ public class ShopTest {
             "High Sierra", 
             2019, 
             1000);
-        assertEquals("2019 MacBook Pro", myComputer.description); // checks whether the constructor processes the information correctly
+        // checks whether the input description is stored correctly to the myComputer object
+        assertEquals("2019 MacBook Pro", myComputer.description);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the processor type of computer correctly.
+     */
+    @Test
+    public void test_computer_constructor_processorType(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the processor type stored with object myComputer is the same as input value.
         assertEquals("Intel", myComputer.processorType);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the hard drive capacity of computer correctly.
+     */
+    @Test
+    public void test_computer_constructor_hardDriveCapacity(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks the hard drive capacity
         assertEquals(256, myComputer.hardDriveCapacity);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the memory of computer correctly.
+     */
+    @Test
+    public void test_computer_constructor_memory(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the stored memory is same as input value
         assertEquals(20, myComputer.memory);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the operating system of computer correctly.
+     */
+    @Test
+    public void test_computer_constructor_operatingSystem(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the stored operating system is same as the input one
         assertEquals("High Sierra", myComputer.operatingSystem);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the year computer was made correctly.
+     */
+    @Test
+    public void test_computer_constructor_yearMade(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the stored yearMade is same as input value
         assertEquals(2019, myComputer.yearMade);
+    }
+
+    /*
+     * This method tests if the method throws appropriate exception when the year made is extremely small or large
+     */
+    @Test(expected = IllegalArgumentException.class) 
+    // checks whether the method throws exception when the value for year that's logically invalid.
+    public void test_constructor_getYear_exception() {
+        new Computer(
+        "2019 MacBook Pro", 
+        "Intel", 
+        256, 
+        20, 
+        "High Sierra", 
+        100, 
+        1000);
+    }
+
+    /*
+     * This method tests whether the computer constructor passes the price of computer correctly.
+     */
+    @Test
+    public void test_computer_constructor_price(){
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            20, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the price of computer is stored as inputted.
         assertEquals(1000, myComputer.price);
     }
 
@@ -48,6 +161,22 @@ public class ShopTest {
         assertEquals(1500, myComputer.price); // checks whether the method updates the price of computer to 1500
     }
 
+    /*
+     * This method checks if the setprice method can throw appropriate exception when the user inputs invalid prices.
+     */
+    @Test(expected=Exception.class)
+    public void test_setPrice_exception() {
+        Computer myComputer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            16, 
+            "High Sierra", 
+            2019, 
+            1000);
+        // checks if the setPrice method throws appropriate exception when the value of price is unusual.
+        myComputer.setPrice(-1000);
+    }
 
     /*
      * This method tests if the setOS method can successfully update the operating system of a computer.
@@ -82,7 +211,6 @@ public class ShopTest {
         assertEquals(2019, myComputer.yearMade); // checks whether the year computer was made matches the return
     }
 
-
     @Test
     /*
      * This method tests whether the toString method returns the expected output.
@@ -107,6 +235,7 @@ public class ShopTest {
     }
 
 
+
     // resaleshop tests
 
     /*
@@ -128,14 +257,23 @@ public class ShopTest {
     public void test_buy() throws Exception{
         ResaleShop myShop = new ResaleShop(); 
 
-        Computer newComp = new Computer("2020 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
+        Computer newComp = new Computer(
+            "2020 MacBook Pro", 
+            "Intel", 
+            256, 
+            16, 
+            "High Sierra", 
+            2019, 
+            1000);
         myShop.buy(newComp); // adds a new computer
 
-        assertEquals(2, myShop.inventory.size()); // checks if the number of computers in the inventory is correct after buying.
+        // checks if the number of computers in the inventory is correct after buying.
+        assertEquals(2, myShop.inventory.size()); 
         
+        // checks if the new computer is in the inventory
         boolean found = false;
         for (Computer comp : myShop.inventory) {
-            if (comp.description.equals("2020 MacBook Pro")) { // checks if the new computer is in the inventory
+            if (comp.description.equals("2020 MacBook Pro")) { 
                 found = true;
                 break;
             }
@@ -143,11 +281,21 @@ public class ShopTest {
         assertTrue(found);
     }
 
+    /*
+     * This method tests if the buy method will throw appropriate exception if the user attempts to add the computer that is already in the inventory.
+     */
     @Test(expected = Exception.class)
     public void test_buy_same()throws Exception{
         ResaleShop shop=new ResaleShop();
-        Computer computer = new Computer("2019 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
-        shop.buy(computer);
+        Computer computer = new Computer(
+            "2019 MacBook Pro", 
+            "Intel", 
+            256, 
+            16, 
+            "High Sierra", 
+            2019, 
+            1000);
+        shop.buy(computer); // buys a computer that is exactly same as the one already stored
     }
 
     /*
@@ -161,18 +309,21 @@ public class ShopTest {
         assertEquals(0, myShop.inventory.size()); // checks if the size of the inventory is 0 after removing the only computer in the inventory.
     }
 
-    @Test
-    public void test_sell_OutOfInventory() throws Exception{
-        ResaleShop myShop = new ResaleShop(); 
-        Computer computer = new Computer("PC", "Intel", 128, 6, "Windows", 2012, 200);
-        myShop.sell(computer);
-        assertEquals(0, myShop.inventory.size()); // checks if the size of the inventory is 0 after removing the only computer in the inventory.
-    }
-
+    /*
+     * This method tests if the sell method throws appropriate exception when the user tries to remove a computer that is not in the inventory. 
+     */
     @Test(expected = Exception.class)
     public void test_sell_out()throws Exception{
         ResaleShop shop=new ResaleShop();
-        Computer computer = new Computer("PC", "Intel", 128, 6, "Windows", 2012, 200);
+        Computer computer = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2012, 
+            200);
+        // sells a computer that is not stored in the inventory.
         shop.sell(computer);
     }
 
@@ -182,7 +333,14 @@ public class ShopTest {
     @Test
     public void test_printInventory(){
         ResaleShop myShop = new ResaleShop(); 
-        Computer comp1 = new Computer("2020 MacBook Pro", "Intel", 256, 16, "High Sierra", 2019, 1000);
+        Computer comp1 = new Computer(
+            "2020 MacBook Pro", 
+            "Intel", 
+            256, 
+            16, 
+            "High Sierra", 
+            2019, 
+            1000);
         myShop.inventory.add(comp1); // adds a new computer to the inventory to check if the method works for multiple computers
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream(); // because the return is void for the method, we need this to capture the printed output
@@ -213,6 +371,7 @@ public class ShopTest {
 
         System.setOut(originalOut);
 
+        // checks if the printed message is correct
         assertTrue(outContent.toString().contains("Inventory is empty")); 
     }
 
@@ -223,66 +382,135 @@ public class ShopTest {
     @Test(expected = Exception.class) // tests for exception
     public void test_NA_refurbish() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer notInShop = new Computer("PC", "Intel", 128, 6, "Windows", 2012, 200);
-
+        Computer notInShop = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2012, 
+            200);
+        // checks if the appropriate exception was throwed if trying to refurbish a computer that is not in the inventory.
         myShop.refurbish(notInShop, "Windows 11"); 
     }
 
+    /*
+     * This method tests if the price of a computer made earlier than 2000 is refurbished to a correct price. 
+     */
     @Test
     public void test_refurbish_2000() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 1999, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            1999, 
+            200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "New OS");
+        // checks if the updated price of a old computer made before 2000 is 0
         assertEquals(0, newComp.price);
     }
 
 
+    /*
+     * This method tests if the price of a computer made earlier than 2012 and later than 2000 is refurbished to a correct price. 
+     */
     @Test
     public void test_refurbish_2012() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 2011, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2011, 
+            200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "New OS");
+        // checks if the updated price of a old computer made before 2012, after or at 2000 is 250
         assertEquals(250, newComp.price);
     }
 
+    /*
+     * This method tests if the price of a computer made earlier than 2018 and later than 2012 is refurbished to a correct price. 
+     */
     @Test
     public void test_refurbish_2018() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 2017, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2017, 
+            200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "New OS");
+        // checks if the updated price of a computer made at or after 2012 and before 2018 is 550.
         assertEquals(550, newComp.price);
     }
 
+    /*
+     * This method tests if the price of a computer made later than 2018 is refurbished to a correct price. 
+     */
     @Test
     public void test_refurbish_2019() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 2020, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 2020, 200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "New OS");
+        // checks if the updated price of a computer made at or after 2018 is 1000.
         assertEquals(1000, newComp.price);
     }
 
+    /*
+     * This method tests if the operating system is not updated after refurbishing if the newOS is none. 
+     */
     @Test
     public void test_refurbish_update_OS_none() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 2020, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2020, 
+            200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "None");
-        assertEquals("Windows", newComp.operatingSystem); // lacks exception if the input is none
+        // checks if the updated operating system is not updated when the newOS is none.
+        assertEquals("Windows", newComp.operatingSystem); 
     }
 
+    /*
+     * This method tests if the operating system is updated appropriately after refurbishing if the newOS is none. 
+     */
     @Test
     public void test_refurbish_update_OS_new() throws Exception {
         ResaleShop myShop = new ResaleShop();
-        Computer newComp = new Computer("PC", "Intel", 128, 6, "Windows", 2020, 200);
+        Computer newComp = new Computer(
+            "PC", 
+            "Intel", 
+            128, 
+            6, 
+            "Windows", 
+            2020, 
+            200);
         myShop.inventory.add(newComp);
         myShop.refurbish(newComp, "New OS");
-        assertEquals("None", newComp.operatingSystem); // recognizes correctly
+        // checks if the operating system is updated through setOS if the newOS is not none.
+        assertEquals("None", newComp.operatingSystem);
     }
-
-
 
 }

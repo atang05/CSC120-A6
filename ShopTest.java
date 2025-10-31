@@ -9,7 +9,7 @@ public class ShopTest {
 
     // computer tests
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the description of computer correctly.
      */
     @Test
@@ -23,10 +23,10 @@ public class ShopTest {
             2019, 
             1000);
         // checks whether the input description is stored correctly to the myComputer object
-        assertEquals("2019 MacBook Pro", myComputer.description);
+        assertEquals("2019 MacBook Pro", myComputer.description); // returns true if the description matches the expected output
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the processor type of computer correctly.
      */
     @Test
@@ -43,7 +43,7 @@ public class ShopTest {
         assertEquals("Intel", myComputer.processorType);
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the hard drive capacity of computer correctly.
      */
     @Test
@@ -60,7 +60,7 @@ public class ShopTest {
         assertEquals(256, myComputer.hardDriveCapacity);
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the memory of computer correctly.
      */
     @Test
@@ -77,7 +77,7 @@ public class ShopTest {
         assertEquals(20, myComputer.memory);
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the operating system of computer correctly.
      */
     @Test
@@ -94,7 +94,7 @@ public class ShopTest {
         assertEquals("High Sierra", myComputer.operatingSystem);
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the year computer was made correctly.
      */
     @Test
@@ -111,7 +111,7 @@ public class ShopTest {
         assertEquals(2019, myComputer.yearMade);
     }
 
-    /*
+    /**
      * This method tests if the method throws appropriate exception when the year made is extremely small or large
      */
     @Test(expected = IllegalArgumentException.class) 
@@ -127,7 +127,7 @@ public class ShopTest {
         1000);
     }
 
-    /*
+    /**
      * This method tests whether the computer constructor passes the price of computer correctly.
      */
     @Test
@@ -144,7 +144,7 @@ public class ShopTest {
         assertEquals(1000, myComputer.price);
     }
 
-    /*
+    /**
      * This test methods tests if the setPrice method change the price properly for a computer.
      */
     @Test 
@@ -161,7 +161,7 @@ public class ShopTest {
         assertEquals(1500, myComputer.price); // checks whether the method updates the price of computer to 1500
     }
 
-    /*
+    /**
      * This method checks if the setprice method can throw appropriate exception when the user inputs invalid prices.
      */
     @Test(expected=Exception.class)
@@ -178,7 +178,7 @@ public class ShopTest {
         myComputer.setPrice(-1000);
     }
 
-    /*
+    /**
      * This method tests if the setOS method can successfully update the operating system of a computer.
      */
     @Test 
@@ -195,7 +195,7 @@ public class ShopTest {
         assertEquals("Monterey", myComputer.operatingSystem); //checks whether the method updates operating system properly
     }
 
-    /*
+    /**
      * This method tests whether the getYear method returns the year computer was made correctly.
      */
     @Test
@@ -212,7 +212,7 @@ public class ShopTest {
     }
 
     @Test
-    /*
+    /**
      * This method tests whether the toString method returns the expected output.
      */
     public void test_toString(){
@@ -238,7 +238,7 @@ public class ShopTest {
 
     // resaleshop tests
 
-    /*
+    /**
      * This method tests whether the resales shop constructor initialize the item in the store properly
      */
     @Test
@@ -250,7 +250,7 @@ public class ShopTest {
     }
 
 
-    /*
+    /**
      * This method tests whether the store can store the information of a new computer properly.
      */
     @Test
@@ -281,7 +281,7 @@ public class ShopTest {
         assertTrue(found);
     }
 
-    /*
+    /**
      * This method tests if the buy method will throw appropriate exception if the user attempts to add the computer that is already in the inventory.
      */
     @Test(expected = Exception.class)
@@ -298,7 +298,7 @@ public class ShopTest {
         shop.buy(computer); // buys a computer that is exactly same as the one already stored
     }
 
-    /*
+    /**
      * This method tests if the store can remove the sold computers from the inventory properly.
      */
     @Test
@@ -309,7 +309,7 @@ public class ShopTest {
         assertEquals(0, myShop.inventory.size()); // checks if the size of the inventory is 0 after removing the only computer in the inventory.
     }
 
-    /*
+    /**
      * This method tests if the sell method throws appropriate exception when the user tries to remove a computer that is not in the inventory. 
      */
     @Test(expected = Exception.class)
@@ -327,7 +327,7 @@ public class ShopTest {
         shop.sell(computer);
     }
 
-    /*
+    /**
      * This method tests if the inventory can be printed out appropriately with all items or print correct message if the inventory is empty. 
      */
     @Test
@@ -355,7 +355,7 @@ public class ShopTest {
         assertTrue(outContent.toString().contains("2019 MacBook Pro"));
     }
 
-    /*
+    /**
      * This method tests if a correct message is printed when the inventory is empty.
      */
     @Test
@@ -376,7 +376,7 @@ public class ShopTest {
     }
 
 
-    /*
+    /**
      * This method tests if the refurbish method throws appropriate exception when the called computer is not in the store.
      */
     @Test(expected = Exception.class) // tests for exception
@@ -394,7 +394,7 @@ public class ShopTest {
         myShop.refurbish(notInShop, "Windows 11"); 
     }
 
-    /*
+    /**
      * This method tests if the price of a computer made earlier than 2000 is refurbished to a correct price. 
      */
     @Test
@@ -415,7 +415,7 @@ public class ShopTest {
     }
 
 
-    /*
+    /**
      * This method tests if the price of a computer made earlier than 2012 and later than 2000 is refurbished to a correct price. 
      */
     @Test
@@ -435,7 +435,7 @@ public class ShopTest {
         assertEquals(250, newComp.price);
     }
 
-    /*
+    /**
      * This method tests if the price of a computer made earlier than 2018 and later than 2012 is refurbished to a correct price. 
      */
     @Test
@@ -455,7 +455,7 @@ public class ShopTest {
         assertEquals(550, newComp.price);
     }
 
-    /*
+    /**
      * This method tests if the price of a computer made later than 2018 is refurbished to a correct price. 
      */
     @Test
@@ -473,7 +473,7 @@ public class ShopTest {
         assertEquals(1000, newComp.price);
     }
 
-    /*
+    /**
      * This method tests if the operating system is not updated after refurbishing if the newOS is none. 
      */
     @Test
@@ -493,7 +493,7 @@ public class ShopTest {
         assertEquals("Windows", newComp.operatingSystem); 
     }
 
-    /*
+    /**
      * This method tests if the operating system is updated appropriately after refurbishing if the newOS is none. 
      */
     @Test
